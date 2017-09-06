@@ -59,7 +59,11 @@ class Admin extends CI_Controller {
 		$data['user_id']	= $this->tank_auth->get_user_id();
 		$data['username']	= $this->tank_auth->get_email();
 		$data['role'] = $this->tank_auth->get_role();
-		$this->layout->view('agregar_sede', $data, $return=false);
+
+		if ($data['role'] == "user")
+			redirect('admin/sedes');
+		else if (($data['role'] == "sysadmin") || ($data['role'] == "admin"))
+			$this->layout->view('agregar_sede', $data, $return=false);
 	}
 
 	
@@ -86,11 +90,14 @@ class Admin extends CI_Controller {
 		$data['role'] = $this->tank_auth->get_role();
 
 		$data['sede'] = $this->db->get_where('sedes',array('id'=>$id))->row();
-		$this->layout->view('editar_sede', $data);
+
+		if ($data['role'] == "user")
+			redirect('admin/sedes');
+		else if (($data['role'] == "sysadmin") || ($data['role'] == "admin"))
+			$this->layout->view('editar_sede', $data);
 	}
 
 	public function borrar_sede($id){
-		
 		$this->db->delete('sedes',array('id'=>$id));
 		redirect('admin/sedes');
 	}	
@@ -126,7 +133,11 @@ class Admin extends CI_Controller {
 		$data['puestos'] = $this->db->get('puestos')->result();
 
 		$data['user'] = $this->db->get_where('users',array('id'=>$id))->row();
-		$this->layout->view('editar_usuario', $data);
+
+		if ($data['role'] == "user")
+			redirect('admin/usuarios');
+		else if (($data['role'] == "sysadmin") || ($data['role'] == "admin")) //el admin solo puede ver/modificar mails, eso debe cambiarse en la vista?
+			$this->layout->view('editar_usuario', $data);
 	}
 
 
@@ -143,7 +154,7 @@ class Admin extends CI_Controller {
 		$this->db->join('puestos p', 'u.puesto = p.id');
 		$data['usuarios'] = $this->db->get()->result();
 
-		$this->layout->view('usuarios',$data);
+		$this->layout->view('usuarios',$data); 
 
 	}
 
@@ -175,7 +186,6 @@ class Admin extends CI_Controller {
 		
 		
 		$data['puestos'] = $this->db->get('puestos')->result();
-	
 		$this->layout->view('puestos',$data);
 	}
 
@@ -197,7 +207,11 @@ class Admin extends CI_Controller {
 		$data['user_id']	= $this->tank_auth->get_user_id();
 		$data['username']	= $this->tank_auth->get_email();
 		$data['role'] = $this->tank_auth->get_role();
-		$this->layout->view('agregar_puesto', $data, $return=false);
+
+		if ($data['role'] == "user")
+			redirect('admin/puestos');
+		else if (($data['role'] == "sysadmin") || ($data['role'] == "admin"))
+			$this->layout->view('agregar_puesto', $data, $return=false);
 	}
 
 	
@@ -222,7 +236,11 @@ class Admin extends CI_Controller {
 		$data['role'] = $this->tank_auth->get_role();
 
 		$data['puesto'] = $this->db->get_where('puestos',array('id'=>$id))->row();
-		$this->layout->view('editar_puesto', $data);
+
+		if ($data['role'] == "user")
+			redirect('admin/puestos');
+		else if (($data['role'] == "sysadmin") || ($data['role'] == "admin"))
+			$this->layout->view('editar_puesto', $data);
 	}
 
 	public function borrar_puesto($id){
