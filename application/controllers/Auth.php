@@ -201,7 +201,11 @@ class Auth extends CI_Controller
 			$data['use_recaptcha'] = $use_recaptcha;
 			$data['sedes'] = $this->db->get('sedes')->result();
 			$data['puestos'] = $this->db->get('puestos')->result();
-			$this->layout->view('auth/register_form', $data);
+
+			if ($data['role'] == "user")
+				redirect('admin/usuarios');
+			else if (($data['role'] == "sysadmin") || ($data['role'] == "admin"))
+				$this->layout->view('auth/register_form', $data);
 		
 	}
 
