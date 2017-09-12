@@ -66,6 +66,44 @@ class Admin extends CI_Controller {
 			$this->layout->view('agregar_sede', $data, $return=false);
 	}
 
+	public function perfil(){
+		$data['role'] = $this->tank_auth->get_role();
+		if($_POST){
+			$update['firstname'] = $_POST['nombre'];
+			$update['lastname'] = $_POST['apellido'];
+
+			if($data['role'] == 'sysadmin'){
+				$update['sede_id'] = $_POST['sede_id'];
+				$update['puesto'] = $_POST['puesto'];
+			}
+			
+			$update['telefono'] = $_POST['telefono'];
+			
+			$update['interno'] = $_POST['interno'];
+			$update['celular'] = $_POST['celular'];
+
+
+			$this->db->where('id', $this->tank_auth->get_user_id());
+			$this->db->update('users', $update);
+			
+			redirect('admin/usuarios');
+		
+		}
+
+		$data['active_tab'] = 'usuarios';
+
+		
+		$data['user_id']	= $this->tank_auth->get_user_id();
+		$data['username']	= $this->tank_auth->get_email();
+		
+		$data['sedes'] = $this->db->get('sedes')->result();
+		$data['puestos'] = $this->db->get('puestos')->result();
+
+		$data['user'] = $this->db->get_where('users',array('id'=>$this->tank_auth->get_user_id()))->row();
+		$this->layout->view('perfil', $data);
+	}
+
+
 	
 	public function editar_sede($id){
 
@@ -182,7 +220,7 @@ class Admin extends CI_Controller {
 		$data['user_id']	= $this->tank_auth->get_user_id();
 		$data['username']	= $this->tank_auth->get_email();
 		$data['role'] = $this->tank_auth->get_role();
-		$data['active_tab'] = 'sedes';
+		$data['active_tab'] = 'puestos';
 		
 		
 		$data['puestos'] = $this->db->get('puestos')->result();

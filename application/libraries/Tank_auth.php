@@ -72,6 +72,7 @@ class Tank_auth
 						$this->ci->session->set_userdata(array(
 								'user_id'	=> $user->id,
 								'username'	=> $user->username,
+								'useremail'	=> $user->email,
 								'role'		=> $this->get_role_name($user->role_id),
 								'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
 						));
@@ -208,7 +209,7 @@ class Tank_auth
 	}
 	function get_email()
 	{
-		return $this->ci->session->userdata('email');
+		return $this->ci->session->userdata('useremail');
 	}
 
 	/**

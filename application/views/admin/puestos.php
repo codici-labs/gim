@@ -37,7 +37,7 @@
     <div class="panel-heading">
         <div class="row">
             <div class="col-md-10"><h3 class="panel-title fix-title">Puestos</h3></div>
-            <div class="col-md-2 text-right "><a href="<?=base_url();?>admin/agregar_puesto" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Agregar</a></div>
+            <div class="col-md-2 text-right "> <? if($role != 'user'){?>  <a href="<?=base_url();?>admin/agregar_puesto" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Agregar</a><? } ?>   </div>
         </div>   
     </div>
 
@@ -54,8 +54,9 @@
                         <th rel="codigo"><a href="javascript:void(0)" class="asc" >Código</a></th>
                        
 
-                        
-                        <th rel="acction">Acciones</th>
+                        <? if($role != 'user'){?> 
+                            <th rel="acction">Acciones</th>
+                        <? } ?>   
                       </tr>
                     </thead>
                     <tbody>
@@ -63,12 +64,14 @@
                         <tr>
                             <td><?=$puesto->id?></td>
                             <td><?=$puesto->name?></td>
-                            <td><?=$puesto->code?></td>                        
-                            <td>
-                                <a href="<?=base_url();?>admin/editar_puesto/<?=$puesto->id;?>"><span class="glyphicon glyphicon-pencil"></span></a>
-                                <a href="javascript:void(0);" class="remove" rel="<?=$puesto->id;?>"><span class="glyphicon glyphicon-trash"></span></a>
-                                
-                            <td>
+                            <td><?=$puesto->code?></td>   
+                            <? if($role != 'user'){?>                     
+                                <td>
+                                    <a href="<?=base_url();?>admin/editar_puesto/<?=$puesto->id;?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="javascript:void(0);" class="remove" rel="<?=$puesto->id;?>"><span class="glyphicon glyphicon-trash"></span></a>
+                                    
+                                <td>
+                            <? } ?>
                         </tr>
                     <? } ?>
 
