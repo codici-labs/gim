@@ -58,8 +58,8 @@
             <ul class="nav nav-pills nav-stacked">
               <li role="presentation" class="dashboard-tab <?if($active_tab == 'sedes'){echo "active";}?>"><a href="<?=base_url();?>admin/sedes"><span class="glyphicon glyphicon-home"></span> Sedes</a></li>
               <li role="presentation" class="cvs-tab <?if($active_tab == 'usuarios'){echo "active";}?>"><a href="<?=base_url();?>admin/usuarios" class="list-group-item"><span class="glyphicon glyphicon-user"></span> Usuarios</a></li>
-
-               <li role="presentation" class="cvs-tab <?if($active_tab == 'puestos'){echo "active";}?>"><a href="<?=base_url();?>admin/puestos" class="list-group-item"><span class="glyphicon glyphicon-briefcase"></span> Puestos</a></li>
+              <li role="presentation" class="cvs-tab <?if($active_tab == 'puestos'){echo "active";}?>"><a href="<?=base_url();?>admin/puestos" class="list-group-item"><span class="glyphicon glyphicon-briefcase"></span> Puestos</a></li>
+              <li role="presentation" class="cvs-tab <?if($active_tab == 'fichas'){echo "active";}?>"><a href="<?=base_url();?>admin/fichas" class="list-group-item"><span class="glyphicon glyphicon-file"></span> Fichas</a></li>
             </ul>
             </div>
           </div>

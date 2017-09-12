@@ -287,4 +287,90 @@ class Admin extends CI_Controller {
 		redirect('admin/puestos');
 	}	
 	
+	public function fichas(){
+		
+		$data['user_id']	= $this->tank_auth->get_user_id();
+		$data['username']	= $this->tank_auth->get_email();
+		$data['role'] = $this->tank_auth->get_role();
+		$data['active_tab'] = 'fichas';
+
+		$this->db->select('f.*, s.nombre as sede');
+		$this->db->from('fichas f');
+		$this->db->join('sedes s', 'f.sede_id = s.id');
+		#$this->db->join('puestos p', 'u.puesto = p.id');
+		$data['fichas'] = $this->db->get()->result();
+
+		$this->layout->view('fichas',$data); 
+
+	}
+
+	public function agregar_ficha(){
+
+		if($_POST){
+			
+			$insert['firstname'] = $_POST['nombre'];
+			$insert['lastname'] = $_POST['apellido'];
+			$insert['telefono'] = $_POST['telefono'];
+			$insert['sede_id'] = $_POST['sede_id'];
+			$insert['interno'] = $_POST['interno'];
+			$insert['celular'] = $_POST['celular'];
+			$insert['email'] = $_POST['email'];
+			
+			$this->db->insert('fichas', $insert);
+			redirect('admin/fichas');
+		}
+
+		
+		$data['active_tab'] = 'fichas';
+		$data['user_id']	= $this->tank_auth->get_user_id();
+		$data['username']	= $this->tank_auth->get_email();
+		$data['role'] = $this->tank_auth->get_role();
+		$data['sedes'] = $this->db->get('sedes')->result();
+
+		if ($data['role'] == "user")
+			redirect('admin/fichas');
+		else if (($data['role'] == "sysadmin") || ($data['role'] == "admin"))
+			$this->layout->view('agregar_ficha', $data, $return=false);
+	}
+
+	public function editar_ficha($id){
+
+		if($_POST){
+			$update['firstname'] = $_POST['nombre'];
+			$update['lastname'] = $_POST['apellido'];
+			$update['telefono'] = $_POST['telefono'];
+			$update['sede_id'] = $_POST['sede_id'];
+			$update['interno'] = $_POST['interno'];
+			$update['celular'] = $_POST['celular'];
+			$update['email'] = $_POST['email'];
+
+			$this->db->where('id',$id);
+			$this->db->update('fichas', $update);
+			
+			redirect('admin/fichas');
+		
+		}
+
+		$data['active_tab'] = 'fichas';
+
+		
+		$data['user_id']	= $this->tank_auth->get_user_id();
+		$data['username']	= $this->tank_auth->get_email();
+		$data['role'] = $this->tank_auth->get_role();
+		$data['sedes'] = $this->db->get('sedes')->result();
+		#$data['puestos'] = $this->db->get('puestos')->result();
+
+		$data['ficha'] = $this->db->get_where('fichas',array('id'=>$id))->row();
+
+		if ($data['role'] == "user")
+			redirect('admin/usuarios');
+		else if (($data['role'] == "sysadmin") || ($data['role'] == "admin"))
+			$this->layout->view('editar_ficha', $data);
+	}
+
+	public function borrar_ficha($id){
+		
+		$this->db->delete('fichas',array('id'=>$id));
+		redirect('admin/fichas');
+	}	
 }

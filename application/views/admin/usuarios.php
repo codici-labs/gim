@@ -100,7 +100,7 @@
                             <th rel="contacto">Interno</th>
                             <th rel="contacto">Celular</th>
                             <th rel="contacto">Sede</th>
-
+                            <th rel="codigo">email</th>
                             
                             <th rel="acction">Acciones</th>
                           </tr>
@@ -115,7 +115,8 @@
                                 <td><?=$usuario->telefono?></td>                           
                                 <td><?=$usuario->interno?></td>                           
                                 <td><?=$usuario->celular?></td>                           
-                                <td><?=$usuario->sede?></td>                           
+                                <td><?=$usuario->sede?></td>
+                                <td><?=$usuario->email?></td>                           
                                 <td>
                                     <a href="<?=base_url();?>admin/editar_usuario/<?=$usuario->id;?>"><span class="glyphicon glyphicon-pencil"></span></a>
                                     <a href="javascript:void(0);" class="remove" rel="<?=$usuario->id;?>"><span class="glyphicon glyphicon-trash"></span></a>                               
