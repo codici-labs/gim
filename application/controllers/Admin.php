@@ -191,9 +191,11 @@ class Admin extends CI_Controller {
 		$this->db->join('sedes s', 'u.sede_id = s.id');
 		$this->db->join('puestos p', 'u.puesto = p.id');
 		$data['usuarios'] = $this->db->get()->result();
-
-		$this->layout->view('usuarios',$data); 
-
+		if ($data['role'] == "sysadmin") {
+			$this->layout->view('usuarios',$data); 
+		}
+		else 
+			redirect('admin/sedes');
 	}
 
 
