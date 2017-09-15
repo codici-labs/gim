@@ -24,11 +24,22 @@
 				<tr height="52">
 					<td  width="150">Sede</td>
 					<td>
-					
 					<select class="form-control" name="sede_id" id="sede_id" required>
 						<option value="">Elija</option>
 						<?php foreach ($sedes as $sede){ ?>
 							<option value="<?=$sede->id;?>" <?if($sede->id == $ficha->sede_id){echo 'selected';}?>><?=$sede->nombre;?></option>
+						<?php } ?>
+					</select>
+					</td>
+					<td style="color: red;"></td>
+				</tr>
+				<tr height="52">
+					<td  width="150">Puesto</td>
+					<td>
+					<select class="form-control" name="puesto" id="puesto" required>
+						<option value="">Elija</option>
+						<?php foreach ($puestos as $puesto){ ?>
+							<option value="<?=$puesto->id;?>" <?if($puesto->id == $ficha->puesto){echo 'selected';}?>><?=$puesto->name;?></option>
 						<?php } ?>
 					</select>
 					</td>

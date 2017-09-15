@@ -51,6 +51,18 @@
 							<td style="color: red;"></td>
 						</tr>
 						<tr height="52">
+							<td  width="150">Puesto</td>
+							<td>
+							<select class="form-control" name="puesto" id="puesto" required>
+								<option value="">Elija</option>
+								<?php foreach ($puestos as $puesto){ ?>
+									<option value="<?=$puesto->id;?>"><?=$puesto->name;?></option>
+								<?php } ?>
+							</select>
+							</td>
+							<td style="color: red;"></td>
+						</tr>
+						<tr height="52">
 							<td  width="150">Teléfono</td>
 							<td><input class="form-control" type="text" name="telefono"  id="telefono" maxlength="20" size="30" required ></td>
 							<td style="color: red;"></td>

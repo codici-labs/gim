@@ -92,15 +92,9 @@
                     <table class="table table-hover">
                         <thead id="table_news">
                           <tr>
-                            <th rel="id">Id</th>
-                            <th rel="nombre">Nombre</th>
-                            <th rel="direccion">Apellido</th>
-                            <th rel="codigo">Puesto</th>
-                            <th rel="contacto">Teléfono</th>
-                            <th rel="contacto">Interno</th>
-                            <th rel="contacto">Celular</th>
-                            <th rel="contacto">Sede</th>
-                            <th rel="codigo">email</th>
+                            <th rel="username">Apodo</th>
+                            <th rel="codigo">Mail</th>
+                            <th rel="codigo">Rol</th>
                             
                             <th rel="acction">Acciones</th>
                           </tr>
@@ -108,15 +102,9 @@
                         <tbody>
                         <?foreach ($usuarios as $usuario) {?>
                             <tr>
-                                <td><?=$usuario->id?></td>
-                                <td><?=$usuario->firstname?></td>
-                                <td><?=$usuario->lastname?></td>
-                                <td><?=$usuario->puesto?></td>
-                                <td><?=$usuario->telefono?></td>                           
-                                <td><?=$usuario->interno?></td>                           
-                                <td><?=$usuario->celular?></td>                           
-                                <td><?=$usuario->sede?></td>
-                                <td><?=$usuario->email?></td>                           
+                                <td><?=$usuario->username?></td>
+                                <td><?=$usuario->email?></td>
+                                <td><?=$usuario->role_id?></td>                         
                                 <td>
                                     <a href="<?=base_url();?>admin/editar_usuario/<?=$usuario->id;?>"><span class="glyphicon glyphicon-pencil"></span></a>
                                     <a href="javascript:void(0);" class="remove" rel="<?=$usuario->id;?>"><span class="glyphicon glyphicon-trash"></span></a>                               

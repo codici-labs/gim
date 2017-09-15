@@ -56,6 +56,7 @@
                             <th rel="contacto">Interno</th>
                             <th rel="contacto">Celular</th>
                             <th rel="contacto">Sede</th>
+                            <th rel="contacto">Puesto</th>
                             <th rel="codigo">email</th>
                             <? if($role == 'sysadmin') { ?>
                                 <th rel="acction">Acciones</th>
@@ -71,7 +72,8 @@
                                 <td><?=$ficha->telefono?></td>                           
                                 <td><?=$ficha->interno?></td>                           
                                 <td><?=$ficha->celular?></td>                           
-                                <td><?=$ficha->sede?></td>                           
+                                <td><?=$ficha->sede?></td>
+                                <td><?=$ficha->puesto?></td>                             
                                 <td><?=$ficha->email?></td>
                                 <td>
                                 <? if(($role == 'sysadmin') || ($role == 'admin')) { ?>
