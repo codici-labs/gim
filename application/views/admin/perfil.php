@@ -12,71 +12,23 @@
 		<div class="col-md-6">
 			<table width="100%">
 				<tr height="52">
-					<td  width="150">Nombre</td>
-					<td><input class="form-control" type="text" name="nombre" id="nombre" maxlength="20" size="30" required value="<?=$user->firstname?>"></td>
+					<td  width="150">Apodo</td>
+					<td><input class="form-control" type="text" name="username" id="username" maxlength="20" size="30" required value="<?=$user->username?>"></td>
 					<td style="color: red;"></td>
 				</tr>
 				<tr height="52">
-					<td  width="150">Apellido</td>
-					<td><input class="form-control" type="text" name="apellido"  id="apellido" maxlength="20" size="30" required value="<?=$user->lastname?>"></td>
-					<td style="color: red;"></td>
-				</tr>
-				<? if($role == 'sysadmin'){?>
-				<tr height="52">
-					<td  width="150">Puesto</td>
-					<td>
-					<select class="form-control" name="puesto" id="puesto" required>
-						<option value="">Elija</option>
-						<?php foreach ($puestos as $puesto){ ?>
-							<option value="<?=$puesto->id;?>" <?if($puesto->id == $user->puesto){echo 'selected';}?>><?=$puesto->name;?></option>
-						<?php } ?>
-					</select>
-					</td>
-					<td style="color: red;"></td>
-				</tr>
-				<tr height="52">
-					<td  width="150">Sede</td>
-					<td>
-					
-					<select class="form-control" name="sede_id" id="sede_id" required>
-						<option value="">Elija</option>
-						<?php foreach ($sedes as $sede){ ?>
-							<option value="<?=$sede->id;?>" <?if($sede->id == $user->sede_id){echo 'selected';}?>><?=$sede->nombre;?></option>
-						<?php } ?>
-					</select>
-					</td>
-					<td style="color: red;"></td>
-				</tr>
-				<? } ?>
-				<tr height="52">
-					<td  width="150">Teléfono</td>
-					<td><input class="form-control" type="text" name="telefono"  id="telefono" maxlength="20" size="30" required value="<?=$user->telefono?>"></td>
-					<td style="color: red;"></td>
-				</tr>
-				<tr height="52">
-					<td  width="150">Interno</td>
-					<td><input class="form-control" type="text" name="interno"  id="interno" maxlength="20" size="30" value="<?=$user->interno?>"></td>
-					<td style="color: red;"></td>
-				</tr>
-				<tr height="52">
-					<td  width="150">Celular</td>
-					<td><input class="form-control" type="text" name="celular"  id="celular" maxlength="20" size="30" value="<?=$user->celular?>"></td>
+					<td  width="150">Rol</td>
+					<td><input class="form-control" type="text" disabled name="role" id="role" maxlength="20" size="30" required value="<?=$role?>"></td>
 					<td style="color: red;"></td>
 				</tr>
 			</table>
 		</div>
 		<div class="col-md-6">
 			<table cellspacing="8" cellpadding="8" width="100%">
-				
-				
 				<tr height="52">
 					<td>Email</td>
-					<td><input class="form-control" type="text" name="email"  id="email" maxlength="80" size="30" required value="<?=$user->email?>"></td>
-					
+					<td><input class="form-control" type="text" name="email"  id="email" maxlength="80" size="30" required value="<?=$user->email?>"></td>	
 				</tr>
-				
-				
-			
 			</table>
 		</div>
 	</div>

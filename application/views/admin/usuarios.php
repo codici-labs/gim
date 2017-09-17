@@ -104,10 +104,16 @@
                             <tr>
                                 <td><?=$usuario->username?></td>
                                 <td><?=$usuario->email?></td>
-                                <td><?=$usuario->role_id?></td>                         
+                                <td><?=$usuario->role?></td>                         
                                 <td>
-                                    <a href="<?=base_url();?>admin/editar_usuario/<?=$usuario->id;?>"><span class="glyphicon glyphicon-pencil"></span></a>
-                                    <a href="javascript:void(0);" class="remove" rel="<?=$usuario->id;?>"><span class="glyphicon glyphicon-trash"></span></a>                               
+                                    <? if($username != $usuario->email){?>
+                                        <a href="<?=base_url();?>admin/editar_usuario/<?=$usuario->id;?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <a href="javascript:void(0);" class="remove" rel="<?=$usuario->id;?>"><span class="glyphicon glyphicon-trash"></span></a>                               
+                                    <? }else {?>
+                                        <a href="<?=base_url();?>admin/perfil"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <span class="glyphicon glyphicon-trash" disabled title="Un usuario no puede borrarse a sí mismo"></span>
+
+                                    <? } ?>
                                 <td>
                             </tr>
                         <? } ?>

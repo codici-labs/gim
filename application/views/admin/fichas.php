@@ -49,9 +49,8 @@
                 <table class="table table-hover">
                     <thead id="table_news">
                         <tr>
-                            <th rel="id">Id</th>
-                            <th rel="nombre">Nombre</th>
                             <th rel="direccion">Apellido</th>
+                            <th rel="nombre">Nombre</th>
                             <th rel="contacto">Teléfono</th>
                             <th rel="contacto">Interno</th>
                             <th rel="contacto">Celular</th>
@@ -66,12 +65,11 @@
                     <tbody>
                         <?foreach ($fichas as $ficha) {?>
                             <tr>
-                                <td><?=$ficha->id?></td>
-                                <td><?=$ficha->firstname?></td>
                                 <td><?=$ficha->lastname?></td>
+                                <td><?=$ficha->firstname?></td>
                                 <td><?=$ficha->telefono?></td>                           
-                                <td><?=$ficha->interno?></td>                           
-                                <td><?=$ficha->celular?></td>                           
+                                <td><? if ($ficha->interno == 0) {echo('-');} else {echo($ficha->interno);}?></td>
+                                <td><? if ($ficha->celular == 0) {echo('-');} else {echo($ficha->celular);}?></td>                                                      
                                 <td><?=$ficha->sede?></td>
                                 <td><?=$ficha->puesto?></td>                             
                                 <td><?=$ficha->email?></td>

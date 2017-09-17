@@ -48,7 +48,6 @@
                 <table class="table table-hover">
                     <thead id="table_news">
                       <tr>
-                        <th rel="id"><a href="javascript:void(0)" class="asc" >Id</a></th>
                         <th rel="nombre"><a href="javascript:void(0)" class="asc" >Nombre</a></th>
                         
                         <th rel="codigo"><a href="javascript:void(0)" class="asc" >Código</a></th>
@@ -62,7 +61,6 @@
                     <tbody>
                     <?foreach ($puestos as $puesto) {?>
                         <tr>
-                            <td><?=$puesto->id?></td>
                             <td><?=$puesto->name?></td>
                             <td><?=$puesto->code?></td>   
                             <? if($role != 'user'){?>                     

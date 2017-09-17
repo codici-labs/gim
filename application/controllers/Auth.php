@@ -142,13 +142,8 @@ class Auth extends CI_Controller
 			$data['errors'] = array();
 
 			$email_activation = $this->config->item('email_activation', 'tank_auth');
-			$nombre = $this->input->post('nombre');
-			$apellido = $this->input->post('apellido');
-			$telefono = $this->input->post('telefono');
-			$interno = $this->input->post('interno');
-			$celular = $this->input->post('celular');
-			$sede_id = $this->input->post('sede_id');
-			$puesto = $this->input->post('puesto');
+			$apodo = $this->input->post('username');
+			$role_id = $this->input->post('role_id');
 			if ($this->form_validation->run()) {								// validation ok
 				if (!is_null($data = $this->tank_auth->create_user(
 
@@ -157,7 +152,7 @@ class Auth extends CI_Controller
 						$use_username ? $this->form_validation->set_value('username') : '',
 						$this->form_validation->set_value('email'),
 						$this->form_validation->set_value('password'),
-						$email_activation, $nombre, $apellido, $telefono, $interno, $celular, $sede_id, $puesto))) {									// success
+						$email_activation, $apodo, $role_id))) {									// success
 
 					$data['site_name'] = $this->config->item('website_name', 'tank_auth');
 
@@ -200,6 +195,7 @@ class Auth extends CI_Controller
 			$data['captcha_registration'] = $captcha_registration;
 			$data['use_recaptcha'] = $use_recaptcha;
 			$data['sedes'] = $this->db->get('sedes')->result();
+			$data['roles'] = $this->db->get('roles')->result();
 			$data['puestos'] = $this->db->get('puestos')->result();
 
 			if ($data['role'] == "user")

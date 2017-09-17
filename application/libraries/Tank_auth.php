@@ -222,7 +222,7 @@ class Tank_auth
 	 * @param	bool
 	 * @return	array
 	 */
-	function create_user($username, $email, $password, $email_activation, $nombre, $apellido, $telefono, $interno, $celular, $sede_id, $puesto)
+	function create_user($username, $email, $password, $email_activation, $apodo, $role)
 	{
 		if ((strlen($username) > 0) AND !$this->ci->users->is_username_available($username)) {
 			$this->error = array('username' => 'auth_username_in_use');
@@ -238,17 +238,17 @@ class Tank_auth
 			$hashed_password = $hasher->HashPassword($password);
 
 			$data = array(
-				'username'	=> $username,
+				'username'	=> $apodo,
 				'password'	=> $hashed_password,
 				'email'		=> $email,
-				
-				'firstname'		=> $nombre,
-				'lastname'		=> $apellido,
-				'telefono'		=> $telefono,
-				'interno'		=> $interno,
-				'celular'		=> $celular,
-				'puesto'		=> $puesto,
-				'sede_id'		=> $sede_id,
+				'role_id'  	=> $role,
+				//'firstname'		=> $nombre,
+				//'lastname'		=> $apellido,
+				//'telefono'		=> $telefono,
+				//'interno'		=> $interno,
+				//'celular'		=> $celular,
+				//'puesto'		=> $puesto,
+				//'sede_id'		=> $sede_id,
 
 				'last_ip'	=> $this->ci->input->ip_address(),
 			);

@@ -50,7 +50,6 @@
                 <table class="table table-hover">
                     <thead id="table_news">
                       <tr>
-                        <th rel="id"><a href="javascript:void(0)" class="asc" >Id</a></th>
                         <th rel="nombre"><a href="javascript:void(0)" class="asc" >Nombre</a></th>
                         <th rel="direccion"><a href="javascript:void(0)" class="asc" >Dirección</a></th>
                         <th rel="codigo"><a href="javascript:void(0)" class="asc" >Código</a></th>
@@ -63,7 +62,6 @@
                     <tbody>
                     <?foreach ($sedes as $sede) {?>
                         <tr>
-                            <td><?=$sede->id?></td>
                             <td><?=$sede->nombre?></td>
                             <td><?=$sede->direccion?></td>
                             <td><?=$sede->codigo?></td>

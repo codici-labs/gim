@@ -34,7 +34,7 @@ class Admin extends CI_Controller {
 		$data['role'] = $this->tank_auth->get_role();
 		$data['active_tab'] = 'sedes';
 		
-		
+		$this->db->order_by('lower(nombre)');
 		$data['sedes'] = $this->db->get('sedes')->result();
 	
 		$this->layout->view('sedes',$data);
@@ -69,19 +69,8 @@ class Admin extends CI_Controller {
 	public function perfil(){
 		$data['role'] = $this->tank_auth->get_role();
 		if($_POST){
-			$update['firstname'] = $_POST['nombre'];
-			$update['lastname'] = $_POST['apellido'];
-
-			if($data['role'] == 'sysadmin'){
-				$update['sede_id'] = $_POST['sede_id'];
-				$update['puesto'] = $_POST['puesto'];
-			}
-			
-			$update['telefono'] = $_POST['telefono'];
-			
-			$update['interno'] = $_POST['interno'];
-			$update['celular'] = $_POST['celular'];
-
+			$update['username'] = $_POST['username'];
+			$update['email'] = $_POST['email'];
 
 			$this->db->where('id', $this->tank_auth->get_user_id());
 			$this->db->update('users', $update);
@@ -96,9 +85,6 @@ class Admin extends CI_Controller {
 		$data['user_id']	= $this->tank_auth->get_user_id();
 		$data['username']	= $this->tank_auth->get_email();
 		
-		$data['sedes'] = $this->db->get('sedes')->result();
-		$data['puestos'] = $this->db->get('puestos')->result();
-
 		$data['user'] = $this->db->get_where('users',array('id'=>$this->tank_auth->get_user_id()))->row();
 		$this->layout->view('perfil', $data);
 	}
@@ -145,13 +131,9 @@ class Admin extends CI_Controller {
 	public function editar_usuario($id){
 
 		if($_POST){
-			$update['firstname'] = $_POST['nombre'];
-			$update['lastname'] = $_POST['apellido'];
-			$update['puesto'] = $_POST['puesto'];
-			$update['telefono'] = $_POST['telefono'];
-			$update['sede_id'] = $_POST['sede_id'];
-			$update['interno'] = $_POST['interno'];
-			$update['celular'] = $_POST['celular'];
+			$update['username'] = $_POST['username'];
+			$update['role_id'] = $_POST['role_id'];
+			$update['email'] = $_POST['email'];
 
 
 			$this->db->where('id',$id);
@@ -167,8 +149,8 @@ class Admin extends CI_Controller {
 		$data['user_id']	= $this->tank_auth->get_user_id();
 		$data['username']	= $this->tank_auth->get_email();
 		$data['role'] = $this->tank_auth->get_role();
-		$data['sedes'] = $this->db->get('sedes')->result();
-		$data['puestos'] = $this->db->get('puestos')->result();
+
+		$data['roles'] = $this->db->get('roles')->result();
 
 		$data['user'] = $this->db->get_where('users',array('id'=>$id))->row();
 
@@ -186,10 +168,10 @@ class Admin extends CI_Controller {
 		$data['role'] = $this->tank_auth->get_role();
 		$data['active_tab'] = 'usuarios';
 
-		$this->db->select('u.*, s.nombre as sede, p.name as puesto');
+		$this->db->select('u.*, r.role as role');
 		$this->db->from('users u');
-		$this->db->join('sedes s', 'u.sede_id = s.id');
-		$this->db->join('puestos p', 'u.puesto = p.id');
+		$this->db->join('roles r', 'u.role_id = r.id');
+		$this->db->order_by('lower(username)');
 		$data['usuarios'] = $this->db->get()->result();
 		if ($data['role'] == "sysadmin") {
 			$this->layout->view('usuarios',$data); 
@@ -237,7 +219,7 @@ class Admin extends CI_Controller {
 			$insert['name'] = $_POST['nombre'];
 			$insert['code'] = $_POST['codigo'];
 			
-			
+			$this->db->order_by('lower(name)');
 			$this->db->insert('puestos', $insert);
 			redirect('admin/puestos');
 		}
@@ -300,6 +282,7 @@ class Admin extends CI_Controller {
 		$this->db->from('fichas f');
 		$this->db->join('sedes s', 'f.sede_id = s.id');
 		$this->db->join('puestos p', 'f.puesto = p.id');
+		$this->db->order_by('lower(lastname), lower(firstname)');
 		$data['fichas'] = $this->db->get()->result();
 		$data['puestos'] = $this->db->get('puestos')->result();
 		$this->layout->view('fichas',$data); 

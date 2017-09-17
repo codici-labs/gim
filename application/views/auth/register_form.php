@@ -49,55 +49,26 @@ $captcha = array(
 		<div class="col-md-6">
 			<table width="100%">
 				<tr height="52">
-					<td  width="150">Nombre</td>
-					<td><input class="form-control" type="text" name="nombre" value="" id="nombre" maxlength="20" size="30" required></td>
+					<td  width="150">Apodo</td>
+					<td><input class="form-control" type="text" name="username" value="" id="username" maxlength="20" size="30" required></td>
 					<td style="color: red;"></td>
 				</tr>
 				<tr height="52">
-					<td  width="150">Apellido</td>
-					<td><input class="form-control" type="text" name="apellido" value="" id="apellido" maxlength="20" size="30" required></td>
-					<td style="color: red;"></td>
-				</tr>
-				<tr height="52">
-					<td  width="150">Puesto</td>
+					<td  width="150">Rol</td>
 					<td>
-					
-					<select class="form-control" name="puesto" id="puesto" required>
+					<select class="form-control" name="role_id" id="role_id" required>
 						<option value="">Elija</option>
-						<?php foreach ($puestos as $puesto){ ?>
-							<option value="<?=$puesto->id;?>"><?=$puesto->name;?></option>
+						<?php foreach ($roles as $role){ ?>
+							<option value="<?=$role->id;?>"><?=$role->role;?></option>
 						<?php } ?>
 					</select>
 					</td>
 					<td style="color: red;"></td>
 				</tr>
 				<tr height="52">
-					<td  width="150">Sede</td>
-					<td>
-					
-					<select class="form-control" name="sede_id" id="sede_id" required>
-						<option value="">Elija</option>
-						<?php foreach ($sedes as $sede){ ?>
-							<option value="<?=$sede->id;?>"><?=$sede->nombre;?></option>
-						<?php } ?>
-					</select>
-					</td>
-					<td style="color: red;"></td>
-				</tr>
-				<tr height="52">
-					<td  width="150">Teléfono</td>
-					<td><input class="form-control" type="text" name="telefono" value="" id="telefono" maxlength="20" size="30" required></td>
-					<td style="color: red;"></td>
-				</tr>
-				<tr height="52">
-					<td  width="150">Interno</td>
-					<td><input class="form-control" type="text" name="interno" value="" id="interno" maxlength="20" size="30"></td>
-					<td style="color: red;"></td>
-				</tr>
-				<tr height="52">
-					<td  width="150">Celular</td>
-					<td><input class="form-control" type="text" name="celular" value="" id="celular" maxlength="20" size="30"></td>
-					<td style="color: red;"></td>
+					<td>Email</td>
+					<td><input class="form-control" type="text" name="email" value="" id="email" maxlength="80" size="30" required></td>
+					<td style="color: red;"><?php echo form_error($email['name']); ?><?php echo isset($errors[$email['name']])?$errors[$email['name']]:''; ?></td>
 				</tr>
 			</table>
 		</div>
@@ -110,12 +81,6 @@ $captcha = array(
 					<td style="color: red;"><?php echo form_error($username['name']); ?><?php echo isset($errors[$username['name']])?$errors[$username['name']]:''; ?></td>
 				</tr>
 				<?php } ?>
-				
-				<tr height="52">
-					<td>Email</td>
-					<td><input class="form-control" type="text" name="email" value="" id="email" maxlength="80" size="30" required></td>
-					<td style="color: red;"><?php echo form_error($email['name']); ?><?php echo isset($errors[$email['name']])?$errors[$email['name']]:''; ?></td>
-				</tr>
 				<tr height="52">
 					<td>Contraseña</td>
 					<td><input class="form-control" type="password" name="password" value="" id="password" maxlength="20" size="30" required></td>
