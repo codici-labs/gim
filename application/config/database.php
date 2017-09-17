@@ -49,9 +49,9 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'codicilabs';
-$db['default']['password'] = 'c0dicilabs2017';
-$db['default']['database'] = 'gimnasio';
+$db['default']['username'] = 'userdb';
+$db['default']['password'] = 'passdb';
+$db['default']['database'] = 'dbname';
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = FALSE;
