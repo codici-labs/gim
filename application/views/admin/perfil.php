@@ -1,10 +1,10 @@
 <ol class="breadcrumb">
   <li><a href="<?=base_url();?>">Home</a></li>
-  <li class="active">Editar usuarios</li>
+  <li class="active">Editar Perfil</li>
 </ol>
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Editar usuario</h3>
+    <h3 class="panel-title">Editar Perfil</h3>
   </div>
   <div class="panel-body">
 	<form method="post" action="">
