@@ -35,7 +35,6 @@
 				<tr height="52">
 					<td>Email</td>
 					<td><input class="form-control" type="text" name="email"  id="email" maxlength="80" size="30" required value="<?=$user->email?>"></td>
-					
 				</tr>
 				
 				

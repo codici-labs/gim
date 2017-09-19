@@ -374,10 +374,53 @@ class Auth extends CI_Controller
 				}
 			}
 			$data['user_id']	= $this->tank_auth->get_user_id();
-			$data['username']	= $this->tank_auth->get_username();
+			$data['username']	= $this->tank_auth->get_email();
 			$data['role'] = $this->tank_auth->get_role();
 			$data['active_tab'] = '';
 			$this->layout->view('auth/change_password_form', $data);
+		}
+	}
+
+	/**
+	 * Capacidad del admin para cambiar los user passwords
+	 *
+	 * @return void
+	 */
+	function admin_change_password_form($id)
+	{
+		if (!$this->tank_auth->is_logged_in()) {								// not logged in or not activated
+			redirect('/auth/login/');
+
+		} else {
+			//$this->form_validation->set_rules('old_password', 'Old Password', 'trim|required|xss_clean');
+			
+			$data['user'] = $this->db->get_where('users',array('id'=>$id))->row();
+
+			$this->form_validation->set_rules('new_password', 'New Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
+			$this->form_validation->set_rules('confirm_new_password', 'Confirm new Password', 'trim|required|xss_clean|matches[new_password]');
+
+			$data['errors'] = array();
+
+			if ($this->form_validation->run()) {								// validation ok
+				if ($this->tank_auth->admin_change_password(
+						//$this->form_validation->set_value('user->id'),
+						$data['user']->id,
+						$this->form_validation->set_value('new_password'))) {	// success
+					$this->_show_message($this->lang->line('auth_message_password_changed'));
+					
+				} else {														// fail
+					$errors = $this->tank_auth->get_error_message();
+					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
+					
+				}
+			}
+			
+			//$data['user'] = $this->db->get_where('users',array('id'=>$id))->row();
+			$data['user_id']	= $this->tank_auth->get_user_id();
+			$data['username']	= $this->tank_auth->get_email();
+			$data['role'] = $this->tank_auth->get_role();
+			$data['active_tab'] = '';
+			$this->layout->view('auth/admin_change_password_form', $data);
 		}
 	}
 
@@ -478,7 +521,7 @@ class Auth extends CI_Controller
 	function _show_message($message)
 	{
 		$this->session->set_flashdata('message', $message);
-		redirect('/auth/');
+		redirect('/admin/usuarios');
 	}
 
 	/**

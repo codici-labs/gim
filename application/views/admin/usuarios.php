@@ -107,12 +107,13 @@
                                 <td><?=$usuario->role?></td>                         
                                 <td>
                                     <? if($username != $usuario->email){?>
-                                        <a href="<?=base_url();?>admin/editar_usuario/<?=$usuario->id;?>"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        <a href="javascript:void(0);" class="remove" rel="<?=$usuario->id;?>"><span class="glyphicon glyphicon-trash"></span></a>                               
+                                        <a href="<?=base_url();?>admin/editar_usuario/<?=$usuario->id;?>"><span class="glyphicon glyphicon-pencil" title="Editar perfil"></span></a>
+                                        <a href="javascript:void(0);" class="remove" rel="<?=$usuario->id;?>"><span class="glyphicon glyphicon-trash" title="Eliminar perfil"></span></a>
+                                        <a href="<?=base_url();?>auth/admin_change_password_form/<?=$usuario->id;?>"><span class="glyphicon glyphicon-lock" title="Cambiar contraseña"></span></a>           
                                     <? }else {?>
-                                        <a href="<?=base_url();?>admin/perfil"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <a href="<?=base_url();?>admin/perfil"><span class="glyphicon glyphicon-pencil" title="Editar perfil"></span></a>
                                         <span class="glyphicon glyphicon-trash" disabled title="Un usuario no puede borrarse a sí mismo"></span>
-
+                                        <a href="<?=base_url();?>auth/change_password/"><span class="glyphicon glyphicon-lock"></span></a>
                                     <? } ?>
                                 <td>
                             </tr>

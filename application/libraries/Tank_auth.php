@@ -467,6 +467,35 @@ class Tank_auth
 	}
 
 	/**
+	 * Admin Change user password (only when user is logged in)
+	 *
+	 * @param	string
+	 * @param	string
+	 * @return	bool
+	 */
+	function admin_change_password($user_id, $new_pass)
+	{
+		//$user_id = $this->ci->session->userdata('user_id');
+		if (!is_null($user = $this->ci->users->get_user_by_id($user_id, TRUE))) {
+
+			// Check if old password correct
+			$hasher = new PasswordHash(
+					$this->ci->config->item('phpass_hash_strength', 'tank_auth'),
+					$this->ci->config->item('phpass_hash_portable', 'tank_auth'));
+
+			// Hash new password using phpass
+			$hashed_password = $hasher->HashPassword($new_pass);
+
+			// Replace old password with new one
+			$this->ci->users->change_password($user_id, $hashed_password);
+			return TRUE;
+
+			
+		}
+		return FALSE;
+	}
+
+	/**
 	 * Change user email (only when user is logged in) and return some data about user:
 	 * user_id, username, new_email, new_email_key.
 	 * The new email cannot be used for login or notification before it is activated.

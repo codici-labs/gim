@@ -74,8 +74,10 @@ class Admin extends CI_Controller {
 
 			$this->db->where('id', $this->tank_auth->get_user_id());
 			$this->db->update('users', $update);
-			
-			redirect('admin/usuarios');
+			if ($data['role'] == "sysadmin")
+				redirect('auth/logout');
+			else
+				redirect('admin/usuarios');
 		
 		}
 
