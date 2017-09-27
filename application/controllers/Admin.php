@@ -19,12 +19,21 @@ class Admin extends CI_Controller {
 		$data['user_id']	= $this->tank_auth->get_user_id();
 		$data['username']	= $this->tank_auth->get_email();
 		$data['role'] = $this->tank_auth->get_role();
-		$data['active_tab'] = 'sedes';
-		
-		
-		$data['sedes'] = $this->db->get('sedes')->result();
+		$data['active_tab'] = 'fichas';
+
+
+		$this->db->select('f.*, s.nombre as sede, p.name as puesto');
+		$this->db->from('fichas f');
+		$this->db->join('sedes s', 'f.sede_id = s.id');
+		$this->db->join('puestos p', 'f.puesto = p.id');
+		$this->db->order_by('lower(lastname), lower(firstname)');
+		$data['fichas'] = $this->db->get()->result();
+		$data['puestos'] = $this->db->get('puestos')->result();
+
+
+
 	
-		$this->layout->view('sedes',$data);
+		$this->layout->view('fichas',$data);
 	}
 
 	public function sedes(){
