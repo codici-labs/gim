@@ -58,6 +58,7 @@ class Admin extends CI_Controller {
 			$insert['codigo'] = $_POST['codigo'];
 			$insert['direccion'] = $_POST['direccion'];
 			$insert['contacto'] = $_POST['contacto'];
+			$insert['mail_list'] = $_POST['listacorreo'];
 			
 			$this->db->insert('sedes', $insert);
 			redirect('admin/sedes');
@@ -109,7 +110,7 @@ class Admin extends CI_Controller {
 			$update['codigo'] = $_POST['codigo'];
 			$update['direccion'] = $_POST['direccion'];
 			$update['contacto'] = $_POST['contacto'];
-
+			$update['mail_list'] = $_POST['listacorreo'];
 
 			$this->db->where('id',$id);
 			$this->db->update('sedes',$update);

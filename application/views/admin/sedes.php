@@ -54,6 +54,7 @@
                         <th rel="direccion"><a href="javascript:void(0)" class="asc" >Dirección</a></th>
                         <th rel="codigo"><a href="javascript:void(0)" class="asc" >Código</a></th>
                         <th rel="contacto"><a href="javascript:void(0)" class="asc" >Contacto</a></th>
+                        <th rel="listacorreo"><a href="javascript:void(0)" class="asc" >Lista de correo</a></th>
                         <? if($role != 'user'){?> 
                             <th rel="acction">Acciones</th>
                         <? } ?>   
@@ -65,7 +66,8 @@
                             <td><?=$sede->nombre?></td>
                             <td><?=$sede->direccion?></td>
                             <td><?=$sede->codigo?></td>
-                            <td><?=$sede->contacto?></td> 
+                            <td><?=$sede->contacto?></td>
+                            <td><?=$sede->mail_list?></td> 
                             <? if($role != 'user'){?>                                
                                 <td>
                                     <a href="<?=base_url();?>admin/editar_sede/<?=$sede->id;?>"><span class="glyphicon glyphicon-pencil"></span></a>

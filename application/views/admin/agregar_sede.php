@@ -51,6 +51,14 @@
 						</div>					  
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="listacorreo">Lista de correo</label>
+							<textarea class="form-control" id="listacorreo" name="listacorreo" rows="5"></textarea>
+						</div>					  
+					</div>
+				</div>
 				
 				
 				 
