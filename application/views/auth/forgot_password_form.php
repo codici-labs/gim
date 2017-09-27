@@ -57,7 +57,7 @@ if ($this->config->item('use_username', 'tank_auth')) {
 	
 	<tr>
 		<td colspan="3">
-		<?php echo form_submit('reset', 'Get a new password'); ?>
+		<?php echo form_submit('reset', 'Obtener una nueva contraseña'); ?>
 		
 			
 

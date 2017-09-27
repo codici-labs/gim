@@ -1,5 +1,5 @@
 <ol class="breadcrumb">
-  <li><a href="<?=base_url();?>">Home</a></li>
+  <li><a href="<?=base_url();?>">Inicio</a></li>
   <li class="active">Editar fichas</li>
 </ol>
 <div class="panel panel-default">

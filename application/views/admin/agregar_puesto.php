@@ -2,7 +2,7 @@
 <?php echo add_style('multi-select');?>  
 <?php echo add_style('edit');?>
 <ol class="breadcrumb">
-  <li><a href="<?=base_url();?>">Home</a></li>
+  <li><a href="<?=base_url();?>">Inicio</a></li>
   <li class="active">Agregar puestos</li>
 </ol>
 <div class="panel panel-default">
