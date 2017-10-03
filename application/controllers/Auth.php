@@ -171,7 +171,7 @@ class Auth extends CI_Controller
 							$this->_send_email('welcome', $data['email'], $data);
 						}
 						unset($data['password']); // Clear password (just for any case)
-
+						$this->session->set_flashdata('message', 'Usuario creado correctamente.');
 						redirect('admin/usuarios');
 						//$this->_show_message($this->lang->line('auth_message_registration_completed_2').' '.anchor('/auth/login/', 'Login'));
 					}

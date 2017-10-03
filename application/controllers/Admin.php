@@ -12,6 +12,8 @@ class Admin extends CI_Controller {
 		if (!$this->tank_auth->is_logged_in()) {
 			redirect('/auth/login/');
 		} 
+		error_reporting(E_ALL);
+ini_set('display_errors', 1);
 	}
 
 	public function index(){
@@ -61,6 +63,7 @@ class Admin extends CI_Controller {
 			$insert['mail_list'] = $_POST['listacorreo'];
 			
 			$this->db->insert('sedes', $insert);
+			$this->session->set_flashdata('message', 'Sede agregada con correctamente.');
 			redirect('admin/sedes');
 		}
 
@@ -114,7 +117,7 @@ class Admin extends CI_Controller {
 
 			$this->db->where('id',$id);
 			$this->db->update('sedes',$update);
-			
+			$this->session->set_flashdata('message', 'Sede editada correctamente.');
 			redirect('admin/sedes');
 		
 		}
@@ -135,6 +138,7 @@ class Admin extends CI_Controller {
 
 	public function borrar_sede($id){
 		$this->db->delete('sedes',array('id'=>$id));
+		$this->session->set_flashdata('message', 'Sede borrada correctamente.');
 		redirect('admin/sedes');
 	}	
 	
@@ -150,7 +154,7 @@ class Admin extends CI_Controller {
 
 			$this->db->where('id',$id);
 			$this->db->update('users', $update);
-			
+			$this->session->set_flashdata('message', 'Usuario editado correctamente.');
 			redirect('admin/usuarios');
 		
 		}
@@ -207,6 +211,7 @@ class Admin extends CI_Controller {
 	public function borrar_usuario($id){
 		
 		$this->db->delete('users',array('id'=>$id));
+		$this->session->set_flashdata('message', 'Usuario borrado correctamente.');
 		redirect('admin/usuarios');
 	}	
 
@@ -233,6 +238,7 @@ class Admin extends CI_Controller {
 			
 			$this->db->order_by('lower(name)');
 			$this->db->insert('puestos', $insert);
+			$this->session->set_flashdata('message', 'Puesto agregado correctamente.');
 			redirect('admin/puestos');
 		}
 
@@ -258,7 +264,7 @@ class Admin extends CI_Controller {
 
 			$this->db->where('id',$id);
 			$this->db->update('puestos',$update);
-			
+			$this->session->set_flashdata('message', 'Puesto editado correctamente.');
 			redirect('admin/puestos');
 		
 		}
@@ -280,6 +286,7 @@ class Admin extends CI_Controller {
 	public function borrar_puesto($id){
 		
 		$this->db->delete('puestos',array('id'=>$id));
+		$this->session->set_flashdata('message', 'Puesto borrado correctamente.');
 		redirect('admin/puestos');
 	}	
 	
@@ -314,6 +321,7 @@ class Admin extends CI_Controller {
 			$insert['email'] = $_POST['email'];
 			$insert['puesto'] = $_POST['puesto'];
 			$this->db->insert('fichas', $insert);
+			$this->session->set_flashdata('message', 'Ficha agregada correctamente.');
 			redirect('admin/fichas');
 		}
 
@@ -344,7 +352,7 @@ class Admin extends CI_Controller {
 			$update['puesto'] = $_POST['puesto'];
 			$this->db->where('id',$id);
 			$this->db->update('fichas', $update);
-			
+			$this->session->set_flashdata('message', 'Ficha editada correctamente.');
 			redirect('admin/fichas');
 		
 		}
@@ -369,6 +377,7 @@ class Admin extends CI_Controller {
 	public function borrar_ficha($id){
 		
 		$this->db->delete('fichas',array('id'=>$id));
+		$this->session->set_flashdata('message', 'Ficha borrada correctamente.');
 		redirect('admin/fichas');
 	}	
 }
