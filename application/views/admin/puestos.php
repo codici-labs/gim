@@ -56,9 +56,9 @@
                 <table class="table table-hover">
                     <thead id="table_news">
                       <tr>
-                        <th rel="nombre"><a href="javascript:void(0)" class="asc" >Nombre</a></th>
+                        <th rel="nombre"><a href="<?=base_url();?>admin/puestos/name">Nombre</a></th>
                         
-                        <th rel="codigo"><a href="javascript:void(0)" class="asc" >Código</a></th>
+                        <th rel="codigo"><a href="<?=base_url();?>admin/puestos/code">Código</a></th>
                        
 
                         <? if($role != 'user'){?> 

@@ -57,14 +57,14 @@
                 <table class="table table-hover">
                     <thead id="table_news">
                         <tr>
-                            <th rel="direccion">Apellido</th>
-                            <th rel="nombre">Nombre</th>
-                            <th rel="contacto">Teléfono</th>
-                            <th rel="contacto">Interno</th>
-                            <th rel="contacto">Celular</th>
-                            <th rel="contacto">Sede</th>
+                            <th rel="direccion"><a href="<?=base_url();?>admin/fichas/lastname">Apellido</a></th>
+                            <th rel="nombre"><a href="<?=base_url();?>admin/fichas/firstname">Nombre</a></th>
+                            <th rel="contacto"><a href="<?=base_url();?>admin/fichas/telefono">Teléfono</a></th>
+                            <th rel="contacto"><a href="<?=base_url();?>admin/fichas/interno">Interno</a></th>
+                            <th rel="contacto"><a href="<?=base_url();?>admin/fichas/celular">Celular</a></th>
+                            <th rel="contacto"><a href="<?=base_url();?>admin/fichas/sede_id">Sede</a></th>
                             <th rel="contacto">Puesto</th>
-                            <th rel="codigo">email</th>
+                            <th rel="codigo"><a href="<?=base_url();?>admin/fichas/email">email</a></th>
                             <? if($role == 'sysadmin') { ?>
                                 <th rel="acction">Acciones</th>
                             <? } ?> 

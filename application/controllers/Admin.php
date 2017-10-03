@@ -38,14 +38,19 @@ ini_set('display_errors', 1);
 		$this->layout->view('fichas',$data);
 	}
 
-	public function sedes(){
+	public function sedes($order_field = false){
 		
 		$data['user_id']	= $this->tank_auth->get_user_id();
 		$data['username']	= $this->tank_auth->get_email();
 		$data['role'] = $this->tank_auth->get_role();
 		$data['active_tab'] = 'sedes';
 		
-		$this->db->order_by('lower(nombre)');
+		
+		if($order_field != ''){
+			$this->db->order_by($order_field, 'asc');
+		}else{
+			$this->db->order_by('lower(nombre)');
+		}
 		$data['sedes'] = $this->db->get('sedes')->result();
 	
 		$this->layout->view('sedes',$data);
@@ -177,7 +182,7 @@ ini_set('display_errors', 1);
 	}
 
 
-	public function usuarios(){
+	public function usuarios($order_field = false){
 		
 		$data['user_id']	= $this->tank_auth->get_user_id();
 		$data['username']	= $this->tank_auth->get_email();
@@ -187,7 +192,12 @@ ini_set('display_errors', 1);
 		$this->db->select('u.*, r.role as role');
 		$this->db->from('users u');
 		$this->db->join('roles r', 'u.role_id = r.id');
-		$this->db->order_by('lower(username)');
+		
+		if($order_field != ''){
+			$this->db->order_by($order_field, 'asc');
+		}else{
+			$this->db->order_by('lower(username)');
+		}
 		$data['usuarios'] = $this->db->get()->result();
 		if ($data['role'] == "sysadmin") {
 			$this->layout->view('usuarios',$data); 
@@ -216,7 +226,7 @@ ini_set('display_errors', 1);
 	}	
 
 
-	public function puestos(){
+	public function puestos($order_field = false){
 		
 		$data['user_id']	= $this->tank_auth->get_user_id();
 		$data['username']	= $this->tank_auth->get_email();
@@ -224,6 +234,10 @@ ini_set('display_errors', 1);
 		$data['active_tab'] = 'puestos';
 		
 		
+		
+		if($order_field != ''){
+			$this->db->order_by($order_field, 'asc');
+		}
 		$data['puestos'] = $this->db->get('puestos')->result();
 		$this->layout->view('puestos',$data);
 	}
@@ -290,7 +304,7 @@ ini_set('display_errors', 1);
 		redirect('admin/puestos');
 	}	
 	
-	public function fichas(){
+	public function fichas($order_field = false){
 		
 		$data['user_id']	= $this->tank_auth->get_user_id();
 		$data['username']	= $this->tank_auth->get_email();
@@ -301,7 +315,12 @@ ini_set('display_errors', 1);
 		$this->db->from('fichas f');
 		$this->db->join('sedes s', 'f.sede_id = s.id');
 		$this->db->join('puestos p', 'f.puesto = p.id');
-		$this->db->order_by('lower(lastname), lower(firstname)');
+		if($order_field != ''){
+			$this->db->order_by($order_field, 'asc');
+		}else{
+			$this->db->order_by('lastname', 'asc');
+		}
+		
 		$data['fichas'] = $this->db->get()->result();
 		$data['puestos'] = $this->db->get('puestos')->result();
 		$this->layout->view('fichas',$data); 

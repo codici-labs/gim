@@ -60,11 +60,11 @@
                 <table class="table table-hover">
                     <thead id="table_news">
                       <tr>
-                        <th rel="nombre"><a href="javascript:void(0)" class="asc" >Nombre</a></th>
-                        <th rel="direccion"><a href="javascript:void(0)" class="asc" >Dirección</a></th>
-                        <th rel="codigo"><a href="javascript:void(0)" class="asc" >Código</a></th>
-                        <th rel="contacto"><a href="javascript:void(0)" class="asc" >Contacto</a></th>
-                        <th rel="listacorreo"><a href="javascript:void(0)" class="asc" >Lista de correo</a></th>
+                        <th rel="nombre"><a href="<?=base_url();?>admin/sedes/nombre">Nombre</a></th>
+                        <th rel="direccion"><a href="<?=base_url();?>admin/sedes/direccion">Dirección</a></th>
+                        <th rel="codigo"><a href="<?=base_url();?>admin/sedes/codigo">Código</a></th>
+                        <th rel="contacto"><a href="<?=base_url();?>admin/sedes/contacto">Contacto</a></th>
+                        <th rel="listacorreo"><a href="<?=base_url();?>admin/sedes/mail_list">Lista de correo</a></th>
                         <? if($role != 'user'){?> 
                             <th rel="acction">Acciones</th>
                         <? } ?>   

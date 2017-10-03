@@ -57,9 +57,9 @@
                      <table class="table table-hover">
                         <thead id="table_news">
                           <tr>
-                            <th rel="nombre">Nombre</th>
-                            <th rel="direccion">Apellido</th>
-                            <th rel="codigo">email</th>
+                            <th rel="nombre"><a href="<?=base_url();?>admin/usuarios/firstname">Nombre</a></th>
+                            <th rel="direccion"><a href="<?=base_url();?>admin/usuarios/lastname">Apellido</a></th>
+                            <th rel="codigo"><a href="<?=base_url();?>admin/usuarios/email">email</a></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -78,9 +78,9 @@
                     <table class="table table-hover">
                         <thead id="table_news">
                           <tr>
-                            <th rel="nombre">Nombre</th>
-                            <th rel="direccion">Apellido</th>
-                            <th rel="codigo">email</th>
+                            <th rel="nombre"><a href="<?=base_url();?>admin/usuarios/firstname">Nombre</a></th>
+                            <th rel="direccion"><a href="<?=base_url();?>admin/usuarios/lastname">Apellido</a></th>
+                            <th rel="codigo"><a href="<?=base_url();?>admin/usuarios/email">email</a></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -100,8 +100,8 @@
                     <table class="table table-hover">
                         <thead id="table_news">
                           <tr>
-                            <th rel="username">Apodo</th>
-                            <th rel="codigo">Mail</th>
+                            <th rel="username"><a href="<?=base_url();?>admin/usuarios/username">Apodo</a></th>
+                            <th rel="codigo"><a href="<?=base_url();?>admin/usuarios/email">Mail</a></th>
                             <th rel="codigo">Rol</th>
                             
                             <th rel="acction">Acciones</th>
