@@ -62,8 +62,8 @@
                             <th rel="contacto"><a href="<?=base_url();?>admin/fichas/telefono">Teléfono</a></th>
                             <th rel="contacto"><a href="<?=base_url();?>admin/fichas/interno">Interno</a></th>
                             <th rel="contacto"><a href="<?=base_url();?>admin/fichas/celular">Celular</a></th>
-                            <th rel="contacto"><a href="<?=base_url();?>admin/fichas/sede_id">Sede</a></th>
-                            <th rel="contacto">Puesto</th>
+                            <th rel="contacto"><a href="<?=base_url();?>admin/fichas/sede">Sede</a></th>
+                            <th rel="contacto"><a href="<?=base_url();?>admin/fichas/f.puesto">Puesto</a></th>
                             <th rel="codigo"><a href="<?=base_url();?>admin/fichas/email">email</a></th>
                             <? if($role == 'sysadmin') { ?>
                                 <th rel="acction">Acciones</th>

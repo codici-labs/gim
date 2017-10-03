@@ -102,7 +102,7 @@
                           <tr>
                             <th rel="username"><a href="<?=base_url();?>admin/usuarios/username">Apodo</a></th>
                             <th rel="codigo"><a href="<?=base_url();?>admin/usuarios/email">Mail</a></th>
-                            <th rel="codigo">Rol</th>
+                            <th rel="codigo"><a href="<?=base_url();?>admin/usuarios/role">Rol</a></th>
                             
                             <th rel="acction">Acciones</th>
                           </tr>
