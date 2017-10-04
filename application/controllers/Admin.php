@@ -47,7 +47,7 @@ ini_set('display_errors', 1);
 		
 		
 		if(($order_field == 'nombre')||($order_field == 'direccion')||($order_field == 'codigo')||($order_field == 'contacto')||($order_field == 'mail_list')){
-			$this->db->order_by($order_field, 'asc');
+			$this->db->order_by('lower('.$order_field.')', 'asc');
 		}else{
 			$this->db->order_by('lower(nombre)');
 		}
@@ -194,7 +194,7 @@ ini_set('display_errors', 1);
 		$this->db->join('roles r', 'u.role_id = r.id');
 		
 		if(($order_field == 'username')||($order_field == 'email')||($order_field == 'role')){
-			$this->db->order_by($order_field, 'asc');
+			$this->db->order_by('lower('.$order_field.')', 'asc');
 		}else{
 			$this->db->order_by('lower(username)');
 		}
@@ -236,7 +236,7 @@ ini_set('display_errors', 1);
 		
 		
 		if(($order_field == 'name')||($order_field == 'code')){
-			$this->db->order_by($order_field, 'asc');
+			$this->db->order_by('lower('.$order_field.')', 'asc');
 		}
 		$data['puestos'] = $this->db->get('puestos')->result();
 		$this->layout->view('puestos',$data);
@@ -316,7 +316,7 @@ ini_set('display_errors', 1);
 		$this->db->join('sedes s', 'f.sede_id = s.id');
 		$this->db->join('puestos p', 'f.puesto = p.id');
 		if(($order_field == 'lastname')||($order_field == 'firstname')||($order_field == 'telefono')||($order_field == 'interno')||($order_field == 'celular')||($order_field == 'sede')||($order_field == 'f.puesto')||($order_field == 'email')){
-			$this->db->order_by($order_field, 'asc');
+			$this->db->order_by('lower('.$order_field.')', 'asc');
 		}else{
 			$this->db->order_by('lastname', 'asc');
 		}
