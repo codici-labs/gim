@@ -9,43 +9,117 @@ class Admin extends CI_Controller {
 		$this->load->library('tank_auth');
 		$this->load->library('layout');
 		$this->layout->setFolder('admin');
+		$this->load->library('pagination');
+		$this->load->helper("url");
 		if (!$this->tank_auth->is_logged_in()) {
 			redirect('/auth/login/');
 		} 
 		error_reporting(E_ALL);
-ini_set('display_errors', 1);
+		ini_set('display_errors', 1);
 	}
 
 	public function index(){
+		$this->db->from('fichas');
+
+		$fichas = $this->db->get();
+		$rowcount = $fichas->num_rows();
+
+		$config['base_url'] = base_url().'admin/index/';
+		$config['total_rows'] = $rowcount;
+		$config['per_page'] = 15;
+		$config["uri_segment"] = 3;
+		$config['full_tag_open'] = "<ul class='pagination'>";
+	    $config['full_tag_close'] = '</ul>';
+	    $config['num_tag_open'] = '<li>';
+	    $config['num_tag_close'] = '</li>';
+	    $config['cur_tag_open'] = '<li class="active"><a href="#">';
+	    $config['cur_tag_close'] = '</a></li>';
+	    $config['prev_tag_open'] = '<li>';
+	    $config['prev_tag_close'] = '</li>';
+	    $config['first_tag_open'] = '<li>';
+	    $config['first_tag_close'] = '</li>';
+	    $config['last_tag_open'] = '<li>';
+	    $config['last_tag_close'] = '</li>';
+	    $config['prev_link'] = '<i class="fa fa-long-arrow-left"></i>Previous Page';
+	    $config['prev_tag_open'] = '<li>';
+	    $config['prev_tag_close'] = '</li>';
+	    $config['next_link'] = 'Next Page<i class="fa fa-long-arrow-right"></i>';
+	    $config['next_tag_open'] = '<li>';
+	    $config['next_tag_close'] = '</li>';
 		
+		$this->pagination->initialize($config);
+
+		
+
+
 		$data['user_id']	= $this->tank_auth->get_user_id();
 		$data['username']	= $this->tank_auth->get_email();
 		$data['role'] = $this->tank_auth->get_role();
 		$data['active_tab'] = 'fichas';
 
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
+		$this->db->limit($config['per_page'] , $page);
 		$this->db->select('f.*, s.nombre as sede, p.name as puesto');
 		$this->db->from('fichas f');
 		$this->db->join('sedes s', 'f.sede_id = s.id');
 		$this->db->join('puestos p', 'f.puesto = p.id');
 		$this->db->order_by('lower(lastname), lower(firstname)');
-		$data['fichas'] = $this->db->get()->result();
+		$query = $this->db->get();
+
 		$data['puestos'] = $this->db->get('puestos')->result();
+		$data['fichas'] = $query->result();
 
 
 
-	
+
 		$this->layout->view('fichas',$data);
 	}
 
 	public function sedes($order_field = false){
 		
+
+		$this->db->from('sedes');
+
+		$sedes = $this->db->get();
+		$rowcount = $sedes->num_rows();
+
+		$config['base_url'] = base_url().'admin/sedes/';
+		$config['total_rows'] = $rowcount;
+		$config['per_page'] = 15;
+		$config["uri_segment"] = 4;
+		$config['full_tag_open'] = "<ul class='pagination'>";
+	    $config['full_tag_close'] = '</ul>';
+	    $config['num_tag_open'] = '<li>';
+	    $config['num_tag_close'] = '</li>';
+	    $config['cur_tag_open'] = '<li class="active"><a href="#">';
+	    $config['cur_tag_close'] = '</a></li>';
+	    $config['prev_tag_open'] = '<li>';
+	    $config['prev_tag_close'] = '</li>';
+	    $config['first_tag_open'] = '<li>';
+	    $config['first_tag_close'] = '</li>';
+	    $config['last_tag_open'] = '<li>';
+	    $config['last_tag_close'] = '</li>';
+	    $config['prev_link'] = '<i class="fa fa-long-arrow-left"></i>Previous Page';
+	    $config['prev_tag_open'] = '<li>';
+	    $config['prev_tag_close'] = '</li>';
+	    $config['next_link'] = 'Next Page<i class="fa fa-long-arrow-right"></i>';
+	    $config['next_tag_open'] = '<li>';
+	    $config['next_tag_close'] = '</li>';
+		
+		$this->pagination->initialize($config);
+
 		$data['user_id']	= $this->tank_auth->get_user_id();
 		$data['username']	= $this->tank_auth->get_email();
 		$data['role'] = $this->tank_auth->get_role();
 		$data['active_tab'] = 'sedes';
 		
 		
+
+
+		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+
+		$this->db->limit($config['per_page'] , $page);
 		if(($order_field == 'nombre')||($order_field == 'direccion')||($order_field == 'codigo')||($order_field == 'contacto')||($order_field == 'mail_list')){
 			$this->db->order_by('lower('.$order_field.')', 'asc');
 		}else{
@@ -183,12 +257,43 @@ ini_set('display_errors', 1);
 
 
 	public function usuarios($order_field = false){
+		$this->db->from('usuarios');
+
+		$usuarios = $this->db->get();
+		$rowcount = $usuarios->num_rows();
+
+		$config['base_url'] = base_url().'admin/usuarios/';
+		$config['total_rows'] = $rowcount;
+		$config['per_page'] = 15;
+		$config["uri_segment"] = 3;
+		$config['full_tag_open'] = "<ul class='pagination'>";
+	    $config['full_tag_close'] = '</ul>';
+	    $config['num_tag_open'] = '<li>';
+	    $config['num_tag_close'] = '</li>';
+	    $config['cur_tag_open'] = '<li class="active"><a href="#">';
+	    $config['cur_tag_close'] = '</a></li>';
+	    $config['prev_tag_open'] = '<li>';
+	    $config['prev_tag_close'] = '</li>';
+	    $config['first_tag_open'] = '<li>';
+	    $config['first_tag_close'] = '</li>';
+	    $config['last_tag_open'] = '<li>';
+	    $config['last_tag_close'] = '</li>';
+	    $config['prev_link'] = '<i class="fa fa-long-arrow-left"></i>Previous Page';
+	    $config['prev_tag_open'] = '<li>';
+	    $config['prev_tag_close'] = '</li>';
+	    $config['next_link'] = 'Next Page<i class="fa fa-long-arrow-right"></i>';
+	    $config['next_tag_open'] = '<li>';
+	    $config['next_tag_close'] = '</li>';
 		
+		$this->pagination->initialize($config);
 		$data['user_id']	= $this->tank_auth->get_user_id();
 		$data['username']	= $this->tank_auth->get_email();
 		$data['role'] = $this->tank_auth->get_role();
 		$data['active_tab'] = 'usuarios';
 
+		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+
+		$this->db->limit($config['per_page'] , $page);
 		$this->db->select('u.*, r.role as role');
 		$this->db->from('users u');
 		$this->db->join('roles r', 'u.role_id = r.id');
@@ -227,14 +332,44 @@ ini_set('display_errors', 1);
 
 
 	public function puestos($order_field = false){
+		$this->db->from('puestos');
+
+		$puestos = $this->db->get();
+		$rowcount = $puestos->num_rows();
+
+		$config['base_url'] = base_url().'admin/puestos/';
+		$config['total_rows'] = $rowcount;
+		$config['per_page'] = 15;
+		$config["uri_segment"] = 3;
+		$config['full_tag_open'] = "<ul class='pagination'>";
+	    $config['full_tag_close'] = '</ul>';
+	    $config['num_tag_open'] = '<li>';
+	    $config['num_tag_close'] = '</li>';
+	    $config['cur_tag_open'] = '<li class="active"><a href="#">';
+	    $config['cur_tag_close'] = '</a></li>';
+	    $config['prev_tag_open'] = '<li>';
+	    $config['prev_tag_close'] = '</li>';
+	    $config['first_tag_open'] = '<li>';
+	    $config['first_tag_close'] = '</li>';
+	    $config['last_tag_open'] = '<li>';
+	    $config['last_tag_close'] = '</li>';
+	    $config['prev_link'] = '<i class="fa fa-long-arrow-left"></i>Previous Page';
+	    $config['prev_tag_open'] = '<li>';
+	    $config['prev_tag_close'] = '</li>';
+	    $config['next_link'] = 'Next Page<i class="fa fa-long-arrow-right"></i>';
+	    $config['next_tag_open'] = '<li>';
+	    $config['next_tag_close'] = '</li>';
 		
+		$this->pagination->initialize($config);
+
 		$data['user_id']	= $this->tank_auth->get_user_id();
 		$data['username']	= $this->tank_auth->get_email();
 		$data['role'] = $this->tank_auth->get_role();
 		$data['active_tab'] = 'puestos';
 		
 		
-		
+		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+		$this->db->limit($config['per_page'] , $page);
 		if(($order_field == 'name')||($order_field == 'code')){
 			$this->db->order_by('lower('.$order_field.')', 'asc');
 		}
@@ -305,12 +440,46 @@ ini_set('display_errors', 1);
 	}	
 	
 	public function fichas($order_field = false){
+
+		$this->db->from('fichas');
+
+		$fichas = $this->db->get();
+		$rowcount = $fichas->num_rows();
+
+		$config['base_url'] = base_url().'admin/fichas/';
+		$config['total_rows'] = $rowcount;
+		$config['per_page'] = 15;
+		$config["uri_segment"] = 4;
+		$config['full_tag_open'] = "<ul class='pagination'>";
+	    $config['full_tag_close'] = '</ul>';
+	    $config['num_tag_open'] = '<li>';
+	    $config['num_tag_close'] = '</li>';
+	    $config['cur_tag_open'] = '<li class="active"><a href="#">';
+	    $config['cur_tag_close'] = '</a></li>';
+	    $config['prev_tag_open'] = '<li>';
+	    $config['prev_tag_close'] = '</li>';
+	    $config['first_tag_open'] = '<li>';
+	    $config['first_tag_close'] = '</li>';
+	    $config['last_tag_open'] = '<li>';
+	    $config['last_tag_close'] = '</li>';
+	    $config['prev_link'] = '<i class="fa fa-long-arrow-left"></i>Previous Page';
+	    $config['prev_tag_open'] = '<li>';
+	    $config['prev_tag_close'] = '</li>';
+	    $config['next_link'] = 'Next Page<i class="fa fa-long-arrow-right"></i>';
+	    $config['next_tag_open'] = '<li>';
+	    $config['next_tag_close'] = '</li>';
+		
+		$this->pagination->initialize($config);
+
 		
 		$data['user_id']	= $this->tank_auth->get_user_id();
 		$data['username']	= $this->tank_auth->get_email();
 		$data['role'] = $this->tank_auth->get_role();
 		$data['active_tab'] = 'fichas';
 
+		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+
+		$this->db->limit($config['per_page'] , $page);
 		$this->db->select('f.*, s.nombre as sede, p.name as puesto');
 		$this->db->from('fichas f');
 		$this->db->join('sedes s', 'f.sede_id = s.id');
