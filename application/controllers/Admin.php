@@ -84,10 +84,18 @@ class Admin extends CI_Controller {
 		$sedes = $this->db->get();
 		$rowcount = $sedes->num_rows();
 
-		$config['base_url'] = base_url().'admin/sedes/';
+		if(($order_field == 'nombre')||($order_field == 'direccion')||($order_field == 'codigo')||($order_field == 'contacto')||($order_field == 'mail_list')){
+			$config['base_url'] = base_url().'admin/sedes/'.$order_field;
+			$config["uri_segment"] = 4;
+		}else{
+			$config['base_url'] = base_url().'admin/sedes';
+			$config["uri_segment"] = 3;
+		}
+
+		
 		$config['total_rows'] = $rowcount;
 		$config['per_page'] = 15;
-		$config["uri_segment"] = 4;
+		
 		$config['full_tag_open'] = "<ul class='pagination'>";
 	    $config['full_tag_close'] = '</ul>';
 	    $config['num_tag_open'] = '<li>';
@@ -115,9 +123,13 @@ class Admin extends CI_Controller {
 		$data['active_tab'] = 'sedes';
 		
 		
+		if(($order_field == 'nombre')||($order_field == 'direccion')||($order_field == 'codigo')||($order_field == 'contacto')||($order_field == 'mail_list')){
+			$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+		}else{
+			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+		}
 
-
-		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+		
 
 		$this->db->limit($config['per_page'] , $page);
 		if(($order_field == 'nombre')||($order_field == 'direccion')||($order_field == 'codigo')||($order_field == 'contacto')||($order_field == 'mail_list')){
@@ -257,15 +269,23 @@ class Admin extends CI_Controller {
 
 
 	public function usuarios($order_field = false){
-		$this->db->from('usuarios');
+		$this->db->from('users');
 
 		$usuarios = $this->db->get();
 		$rowcount = $usuarios->num_rows();
 
-		$config['base_url'] = base_url().'admin/usuarios/';
+		if(($order_field == 'username')||($order_field == 'email')||($order_field == 'role')){
+			$config['base_url'] = base_url().'admin/usuarios/'.$order_field;
+			$config["uri_segment"] = 4;
+		}else{
+			$config['base_url'] = base_url().'admin/usuarios';
+			$config["uri_segment"] = 3;
+		}
+
+		
 		$config['total_rows'] = $rowcount;
 		$config['per_page'] = 15;
-		$config["uri_segment"] = 3;
+		
 		$config['full_tag_open'] = "<ul class='pagination'>";
 	    $config['full_tag_close'] = '</ul>';
 	    $config['num_tag_open'] = '<li>';
@@ -291,7 +311,13 @@ class Admin extends CI_Controller {
 		$data['role'] = $this->tank_auth->get_role();
 		$data['active_tab'] = 'usuarios';
 
-		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+		if(($order_field == 'username')||($order_field == 'email')||($order_field == 'role')){
+			$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+		}else{
+			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+		}
+
+		
 
 		$this->db->limit($config['per_page'] , $page);
 		$this->db->select('u.*, r.role as role');
@@ -337,10 +363,18 @@ class Admin extends CI_Controller {
 		$puestos = $this->db->get();
 		$rowcount = $puestos->num_rows();
 
-		$config['base_url'] = base_url().'admin/puestos/';
+		if(($order_field == 'name')||($order_field == 'code')){
+			$config['base_url'] = base_url().'admin/puestos/'.$order_field;
+			$config["uri_segment"] = 4;
+		} else {
+			$config['base_url'] = base_url().'admin/puestos';
+			$config["uri_segment"] = 3;
+		}
+
+		
 		$config['total_rows'] = $rowcount;
 		$config['per_page'] = 15;
-		$config["uri_segment"] = 3;
+		
 		$config['full_tag_open'] = "<ul class='pagination'>";
 	    $config['full_tag_close'] = '</ul>';
 	    $config['num_tag_open'] = '<li>';
@@ -360,18 +394,26 @@ class Admin extends CI_Controller {
 	    $config['next_tag_open'] = '<li>';
 	    $config['next_tag_close'] = '</li>';
 		
-		$this->pagination->initialize($config);
+		
 
 		$data['user_id']	= $this->tank_auth->get_user_id();
 		$data['username']	= $this->tank_auth->get_email();
 		$data['role'] = $this->tank_auth->get_role();
 		$data['active_tab'] = 'puestos';
 		
-		
-		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+		if(($order_field == 'name')||($order_field == 'code')){
+			$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+		} else {
+			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+		}
+
+		$this->pagination->initialize($config);
+
 		$this->db->limit($config['per_page'] , $page);
 		if(($order_field == 'name')||($order_field == 'code')){
 			$this->db->order_by('lower('.$order_field.')', 'asc');
+		} else{
+			$this->db->order_by('name', 'asc');
 		}
 		$data['puestos'] = $this->db->get('puestos')->result();
 		$this->layout->view('puestos',$data);
@@ -446,10 +488,22 @@ class Admin extends CI_Controller {
 		$fichas = $this->db->get();
 		$rowcount = $fichas->num_rows();
 
-		$config['base_url'] = base_url().'admin/fichas/';
+
+
+		if(($order_field == 'lastname')||($order_field == 'firstname')||($order_field == 'telefono')||($order_field == 'interno')||($order_field == 'celular')||($order_field == 'sede')||($order_field == 'f.puesto')||($order_field == 'email')){
+			$config['base_url'] = base_url().'admin/fichas/'.$order_field;
+			$config["uri_segment"] = 4;
+		}else{
+			$config['base_url'] = base_url().'admin/fichas';
+			$config["uri_segment"] = 3;
+		}
+
+		
+
+
 		$config['total_rows'] = $rowcount;
 		$config['per_page'] = 15;
-		$config["uri_segment"] = 4;
+		
 		$config['full_tag_open'] = "<ul class='pagination'>";
 	    $config['full_tag_close'] = '</ul>';
 	    $config['num_tag_open'] = '<li>';
@@ -469,7 +523,7 @@ class Admin extends CI_Controller {
 	    $config['next_tag_open'] = '<li>';
 	    $config['next_tag_close'] = '</li>';
 		
-		$this->pagination->initialize($config);
+		
 
 		
 		$data['user_id']	= $this->tank_auth->get_user_id();
@@ -477,7 +531,13 @@ class Admin extends CI_Controller {
 		$data['role'] = $this->tank_auth->get_role();
 		$data['active_tab'] = 'fichas';
 
-		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+		if(($order_field == 'lastname')||($order_field == 'firstname')||($order_field == 'telefono')||($order_field == 'interno')||($order_field == 'celular')||($order_field == 'sede')||($order_field == 'f.puesto')||($order_field == 'email')){
+			$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+		}else{
+			$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+		}
+
+		$this->pagination->initialize($config);
 
 		$this->db->limit($config['per_page'] , $page);
 		$this->db->select('f.*, s.nombre as sede, p.name as puesto');
